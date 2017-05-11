@@ -1,0 +1,224 @@
+<body>
+	<header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href="#"><i class="fa fa-phone"></i> +0987554394</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i>14520650@gm.uit.edu.vn</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-4" >
+					
+						<div class="search_box">
+							<form action="../upload/search.php" method="get">
+								<input name="search" style="background-color:white;" type="text" placeholder="Search"/>
+								<button class="btn btn-danger" type="submit" name="ok"><b class="fa fa-search"></b></button>
+							</form>
+						</div>
+						
+					</div>
+					<div class="col-sm-4">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
+		
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							KimOanh<a href="../upload/index.php"><img src="../images/Logo.jpg" alt="" style="width:40px;" /></a>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								
+								<?php 
+										session_start();
+										
+										if(isset($_SESSION['username_login'])){
+											
+											echo '<li class="dropdown">';
+											echo '<a href="#" class="dropdown-toggle" type="button" data-toggle="dropdown">Hi, '.$_SESSION['username_login'].'</a>';
+											echo '<ul class="dropdown-menu">';
+											echo '<li><a href="../upload/consumer.php">Thông tin khách hàng</a></li>';
+											echo '<li><a href="logout.php">Thoát tài khoản</a></li>';
+											echo '</ul>';
+											echo '</li>';
+										}else{
+											echo '<li><a href="#login-box" class="login-window"><i class="fa fa-user"></i>Đăng nhập</a></li>';
+											echo '<li><a href="#signup-box" class="login-window"><i class="fa fa-lock"></i>Đăng kí</a></li>';
+										}
+								?>
+								<?php
+										$ok=1;
+										 if(isset($_SESSION['cart']))
+										 {
+										  foreach($_SESSION['cart'] as $k=>$v)
+										  {
+										   if(isset($k))
+										   {
+										   $ok=2;
+										   }
+										  }
+										 }
+										 if ($ok != 2)
+										  {
+										  echo '<li><a href="../upload/cart.php"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a></li>';
+										 } else {
+										  $items = $_SESSION['cart'];
+										  echo '<li><a href="../upload/cart.php" style="color:orange;"><i class="fa fa-shopping-cart"></i>Giỏ hàng ('.count($items).')</a></li>';
+										 }
+										?>
+								
+							</ul>
+						</div>
+					</div>
+					<!------------------------------------------------------>
+					<div class="login" id="login-box"><h3 align="center">Login</h3>
+
+						<a class="close" href="#"><img class="img-close" title="Close Window" alt="Close" src="../images/close.jpg" style="width:30px; height:30px;" /></a>
+							<form class="login-content" action="login.php" method="post">
+								<label class="username">
+									
+									<input id="username_login" type="text" autocomplete="on" name="username_login" placeholder="Username" value="" />
+								 </label>
+								 <label class="password">
+									
+									<input id="password_login" type="password" name="password_login" placeholder="Password" value="" />
+								 </label>
+									<p> Bạn chưa có tài khoản? <a id="switch_register" href="#signup-box">Đăng kí</a> tại đây</p>
+								 <button class="button submit-button" type="submit" name="submit_login">Sign in</button>
+								 <!--<a class="forgot" href="#">Forgot Password?</a>-->
+							 </form>
+					</div>
+					<!------------------------------------------------------>
+					<div class="login" id="signup-box"><h3 align="center">Sign up</h3>
+
+						 <a class="close" href="#"><img class="img-close" title="Close Window" alt="Close" src="../images/close.jpg" style="width:30px; height:30px;"/></a>
+							<form class="login-content" action="signup.php" method="post">
+								<label class="username">
+									
+									  <input id="username" type="text" name="username" placeholder="User name" value="" />
+	
+								</label>
+								 <label class="password">
+									
+									  <input id="password" type="password" name="password" placeholder="Password" value="" />
+									  
+								 </label>
+								 <label class="repassword">
+									 
+									 <input id="repassword" type="password" name="repassword" placeholder="Re-Password" value="" />
+									 <span><h6 id="check-password" style="color:red;"></h6></span>
+								 </label>
+								 <label class="email">
+									
+									 <input id="email" type="text" name="email" placeholder="Email" value="" />
+				
+								 </label>
+								 	
+								 <button class="button submit-button" type="submit" name="submit">Sign up</button>
+							</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!--/header-middle-->
+	
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div><!--/header-bottom-->
+	</header><!--/header-->
+	
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Sản phẩm</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#mens">
+											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+											Giày nam
+										</a>
+									</h4>
+								</div>
+								<div id="mens" class="panel-collapse collapse">
+									<div class="panel-body">
+										<ul>
+											<li><a href="../catalog/giay_tay_cot_day.php">Giày tây cột dây </a></li>
+											<li><a href="../catalog/giay_tay_xo.php">Giày tây xỏ </a></li>
+											<li><a href="../catalog/giay_moi.php">Giày mọi (giày lười) </a></li>
+											<li><a href="../catalog/giay_vai.php">Giày vải</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#womens">
+											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+											Giày nữ
+										</a>
+									</h4>
+								</div>
+								<div id="womens" class="panel-collapse collapse">
+									<div class="panel-body">
+										<ul>
+											<li><a href="../catalog/giay_bit_got_cao.php">Giày bít gót cao</a></li>
+											<li><a href="../catalog/giay_bit_de_xep.php">Giày bít đế xẹp</a></li>
+											<li><a href="../catalog/giay_bit_de_xuong.php">Giày bít đế xuồng</a></li>
+											<li><a href="../catalog/giay_bup_be.php">Giày búp bê</a></li>
+											<li><a href="../catalog/giay_xang_dan_got_cao.php">Giày xăng đan gót cao</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							
+						</div><!--/category-products-->
+						<div class="shipping text-center"><!--shipping-->
+							<img src="../images/shipping.jpg" alt="" />
+						</div><!--/shipping-->
+					
+					</div>
+				</div>
+				
+				<div class="col-sm-9 padding-right">
+					<div class="features_items"><!--features_items-->
+						<!--<h2 class="title text-center">Sản phẩm được ưa chuộng</h2>-->

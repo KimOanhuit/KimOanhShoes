@@ -1,0 +1,50 @@
+					</div><!--features_items-->	
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<footer id="footer"><!--Footer-->
+		
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<p class="pull-left">Copyright © 2017 KimOanh Shoes shop</p>
+					<p class="pull-right">Designed by KimOanh Dau<span><a target="_blank" href="http://www.themeum.com"></a></span></p>
+				</div>
+			</div>
+		</div>
+		
+	</footer><!--/Footer-->
+
+  
+    <script src="../_js/jquery.js"></script>
+	<script src="../_js/bootstrap.min.js"></script>
+	<script src="../_js/jquery.scrollUp.min.js"></script>
+	<script src="../_js/price-range.js"></script>
+    <script src="../_js/jquery.prettyPhoto.js"></script>
+    <script src="../_js/main.js"></script>
+	<script src="../_js/dialog.js"></script>
+	<script>
+		function openSelect(evt, selectName) {
+			var i, tabcontent, tablinks;
+			tabcontent = document.getElementsByClassName("tabcontent");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+			tablinks = document.getElementsByClassName("tablinks");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
+			}
+			document.getElementById(selectName).style.display = "block";
+			evt.currentTarget.className += " active";
+			
+		}
+		// Get the element with id="defaultOpen" and click on it
+			document.getElementById("defaultOpen").click();
+
+
+	</script>
+	
+</body>
+</html>
