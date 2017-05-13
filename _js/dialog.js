@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 			$('a.login-window').click(function() {
 				var loginBox = $(this).attr('href');
@@ -36,6 +35,9 @@ $(document).ready(function() {
 				}
 			}); 	
 			
-			
+			$('#id_number_quatity').change(function(){
+				alert("Số lượng sản phẩm đã thay đổi");	
+				$("#id_price_tt").val($("#id_number_quatity").val() * $("#id_price").val());	
+			}); 
 });
 

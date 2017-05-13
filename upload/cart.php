@@ -29,16 +29,26 @@ if($ok == 2){
 	$result = $conn->query($sql);	
 	$total = 0;
 		echo "<table cellpadding='0' cellspacing='0' border='1' bordercolor='#000000' width='100%'><tr align='center' style='font-size:18px; background-color:orange; color: white;'><td>Tên sản phẩm</td><td>Hình ảnh</td><td>Giá</td><td>Số lượng</td><td>Tổng tiền sản phẩm</td><td></td></tr>";
+	
+	$inputValues = array();
+	
+	//number quatity default	==> su dung jQuery event change de thay doi
+	
 	while($row = $result->fetch_assoc()){
 						
 		echo "<tr align='center' style='font-size:16px;'>";
 		echo "<td>".$row['TenSanPham']."</td>";
 		echo '<td><img src="'.$row['HinhAnh'].'" alt="" />';
-		echo "<td>".number_format($row['GiaSanPham']*1000)." VND</td>";
-		echo "<td>1</td>";	
-		echo "<td>".number_format($row['GiaSanPham']*1000)." VND</td>";
+		echo "<td><input id='id_price' type='text' size='9' value = '".number_format($row['GiaSanPham']*1000)."'/></td>";
+		
+		//change number quatity
+		echo "<td><input id='id_number_quatity' type='text' size='2' value = '1'/></td>";	
+		
+		//change money when number quatity change
+		echo "<td ><input id='id_price_tt' type='text' size='9' value = '".number_format($row['GiaSanPham']*1000)."'/> VND</td>";
 		echo "<td><a href='delcart.php?productid=".$row['MaSanPham']."'>Xóa Sản Phẩm</a></td>";
 		echo "</tr>";
+			//plus after change money
 			$total+=$row['GiaSanPham'];
 		}
 		
@@ -60,6 +70,5 @@ if($ok == 2){
 	  echo "<p align='center'>Bạn không có món hàng nào trong giỏ hàng<br /><a href='index.php'>Tiếp tục mua sắm</a></p>";
 	  echo "</div>";
 	 }
-
  require '../layout/foot.html';
 ?>
