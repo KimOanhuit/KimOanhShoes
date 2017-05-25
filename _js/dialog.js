@@ -33,11 +33,20 @@ $(document).ready(function() {
 				else{
 					$('#check-password').html("");
 				}
-			}); 	
+			});
 			
-			$('#id_number_quatity').change(function(){
-				alert("Số lượng sản phẩm đã thay đổi");	
-				$("#id_price_tt").val($("#id_number_quatity").val() * $("#id_price").val());	
-			}); 
+			$('#email').change(function(){
+				
+				var email = $(this).val();
+				var reg_mail = /^[A-Za-z0-9]+([_\.\-]?[A-Za-z0-9])*@[A-Za-z0-9]+([\.\-]?[A-Za-z0-9]+)*(\.[A-Za-z]+)+$/;
+				if(!reg_mail.test(email)){
+					$('#check-email').html("Email khong hop le, vui long nhap lai");
+					$('#email').val("");
+				}else{
+					$('#check-email').html("");
+				}
+			});
+						
+			
 });
 

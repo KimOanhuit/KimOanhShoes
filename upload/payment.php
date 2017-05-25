@@ -28,21 +28,23 @@
 		echo "<h4>Thông tin hàng hóa</h4>";
 		echo "<table cellpadding='0' cellspacing='0' border='1' bordercolor='#000000' width='100%'><tr align='center' style='font-size:18px; background-color:orange; color: white;'><td>Tên sản phẩm</td><td>Giá</td><td>Số lượng</td><td>Tổng tiền sản phẩm</td><td></td></tr>";
 	while($row = $result->fetch_assoc()){
+		
+		$soluong = $_SESSION['cart'][$row['MaSanPham']];
+		$tongtien = $_SESSION['cart'][$row['MaSanPham']]*$row['GiaSanPham'];
 						
 		echo "<tr align='center' style='font-size:16px;'>";
 		echo "<td>".$row['TenSanPham']."</td>";
-		echo "<td>".number_format($row['GiaSanPham']*1000)." VND</td>";
-		echo "<td>1</td>";	
-		echo "<td>".number_format($row['GiaSanPham']*1000)." VND</td>";
+		echo "<td>".number_format($row['GiaSanPham'],3)." VND</td>";
+		echo "<td><input readonly style='border:0' name = 'qty[$row[MaSanPham]]' type='tel' size='2' value = '$soluong'/></td>";	
+		echo "<td>".number_format($tongtien,3)." . VND</td>";
 		echo "</tr>";
-			$total+=$row['GiaSanPham'];
+			$total += $tongtien;
 		}
 		
 		echo "</table>";
-		$total *= 1000;
 		echo "<div class='pro' align='right'>";
 		echo "<form action='hoadon.php' method='post'>";
-		echo "<p style='font-size:16px;'>Tổng tiền:<input style='color:red; font-size:15' type='text' name='charge' align='right' value='".$total."'></input></p>";
+		echo "<p style='font-size:16px;'>Tổng tiền:<input style='color:red; font-size:15' type='text' name='charge' align='right' value='".($total*1000)."'></input></p>";
 		echo "<br><br><input class='btn btn-danger' onclick='notify()' type='submit' name='submit' value='Đặt hàng' align=right'></input>";
 		echo "</form>";
 		echo "</div></div></div>";

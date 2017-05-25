@@ -20,7 +20,7 @@
 	
 	if(isset($_POST['submit'])){
 		
-		if(!$username || !$password  || !$email){
+		if(!$username || !$password || !$email){
 			echo "<script>alert('Vui lòng nhập đầy đủ thông tin.')</script>";
 			require "index.php";
 			exit;
@@ -53,6 +53,5 @@
 		}
 	
 	}
-	
 	
 ?>

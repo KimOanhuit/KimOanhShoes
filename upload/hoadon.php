@@ -22,7 +22,8 @@
 	$sql = "SELECT MaSanPham FROM sanpham WHERE MaSanPham in ($str)";
 	$result = $conn->query($sql);
 	while($row = $result->fetch_assoc()){
-		$sql = "INSERT INTO chitiethoadon(MaHoaDon, MaSanPham, SoLuong) VALUES ('$mahoadon',".$row['MaSanPham'].",1)";
+		$soluong = $_SESSION['cart'][$row['MaSanPham']];
+		$sql = "INSERT INTO chitiethoadon(MaHoaDon, MaSanPham, SoLuong) VALUES ('$mahoadon',".$row['MaSanPham'].",$soluong)";
 		$conn->query($sql);
 	}
 	

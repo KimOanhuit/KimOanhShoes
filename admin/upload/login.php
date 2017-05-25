@@ -8,7 +8,8 @@
 	
 	if(isset($_POST['submit'])){
 		if($username == "" || $password == ""){
-			require "login.html";
+			//require "login.html";
+			header('Location: login.html');
 			exit;
 		}
 		
@@ -17,6 +18,7 @@
 		
 		if(mysqli_num_rows($result) == 0){
 			unset($_SESSION['username_admin']);
+			header('Location: login.html');
 			exit;
 		}
 		else{

@@ -1,6 +1,6 @@
 <?php
 	require '../layout/head.html';
-	require '../layout/body.html';
+	require '../layout/body_short.html';
 	require 'database_config.php';
 							$per_page = 15;
 							
@@ -8,7 +8,27 @@
 								
 								$search = addslashes($_GET['search']);
 								
-								$sql_result_count = "SELECT MaSanPham FROM sanpham WHERE TenSanPham like'%$search%' ";
+								//ngoại lệ: search giày tây
+								if($search == "giày tây" || $search == "giay tay"){
+									$search = "giày tây cột dây, xỏ";
+								}
+								
+								$arr_search = explode(" " , $search);
+								$condition = "0";
+								
+								if(count($arr_search) == 1 && ($arr_search[0] == "giay" || $arr_search[0] == "giày"))
+									$condition = "1";
+								
+								for($i = 0; $i < count($arr_search); $i++){
+									if($arr_search[$i] == "giay" || $arr_search[$i] == "giày"){}
+									else
+										$condition = $condition." or TenSanPham like '%$arr_search[$i]%' or KieuSanPham like '%$arr_search[$i]%' or LoaiSanPham like '%$arr_search[$i]%'";
+								}							
+										
+								
+								//$sql_result_count = "SELECT MaSanPham FROM sanpham WHERE TenSanPham like'%$search%' or KieuSanPham like '%$search%' ";
+								$sql_result_count = "SELECT MaSanPham FROM sanpham WHERE $condition";
+														
 								$result_count = $conn->query($sql_result_count);
 								
 								$count = $result_count->num_rows;
@@ -29,13 +49,20 @@
 								$num_of_page = ceil($count/$per_page);
 								if (empty($search)) {
 								}else{
+										/*
+										$sql = "SELECT MaSanPham, TenSanPham,KieuSanPham, GiaSanPham, HinhAnh 
+										FROM sanpham 
+										WHERE TenSanPham like'%$search%' or KieuSanPham like '%$search%'
+										ORDER BY MaSanPham DESC
+										LIMIT $page_num , $per_page";
+										*/
 										
 										$sql = "SELECT MaSanPham, TenSanPham,KieuSanPham, GiaSanPham, HinhAnh 
 										FROM sanpham 
-										WHERE TenSanPham like'%$search%' 
+										WHERE $condition
 										ORDER BY MaSanPham DESC
 										LIMIT $page_num , $per_page";
-										
+																			
 										$result = $conn->query($sql);
 																	
 										if($result->num_rows == 0){
@@ -85,3 +112,4 @@
 	require '../layout/foot.html';
 							
 ?>
+	

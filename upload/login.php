@@ -21,7 +21,7 @@
 	if(isset($_POST['submit_login'])){
 		if($username == "" || $password == ""){
 			echo "<script>alert('Vui lòng nhập đầy đủ thông tin.')</script>";
-			require "index.php";
+			header('Location: index.php');
 			exit;
 		}
 		

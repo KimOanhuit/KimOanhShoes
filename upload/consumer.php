@@ -18,9 +18,7 @@
 			padding: 10px;
 			margin: 20px;
 		}
-		tr:nth-child(odd) {
-			background-color: #dddddd;
-		}
+		
 	</style>
 	<h3 style="color:red;">Thông tin khách hàng</h3>
 	<table>
@@ -46,8 +44,8 @@
 
 	<table>
 			
-		<tr>
-			<td>Mã hóa đơn</td> <td>Ngày hóa đơn</td><td colspan='2'>Thành tiền</td>
+		<tr style='background:#ddd'>
+			<td>Mã hóa đơn</td> <td>Ngày hóa đơn</td><td colspan='3'>Thành tiền</td>
 		</tr>
 		<?php
 		$sql ="SELECT MaHoaDon, NgayHoaDon, ThanhTien FROM hoadon WHERE TenKhachHang = '".$_SESSION['username_login']."'"; 
@@ -55,15 +53,15 @@
 		while($row = $result->fetch_assoc()){
 			$mahoadon = $row['MaHoaDon'];
 			
-			echo "<tr>";
+			echo "<tr style='border-top: 5px solid lightblue;'>";
 			//get id to show data
-			echo "<td>".$row['MaHoaDon']."<a href='#' id='$mahoadon' onclick='detail($mahoadon)'>(chi tiết)</a></td>";
+			echo "<td>".$row['MaHoaDon']."<button id='$mahoadon' class='btn' style='background:#fff; color:blue' onclick='detail($mahoadon)'>(chi tiết)</a></td>";
 			echo "<td>".$row['NgayHoaDon']."</td>";
-			echo "<td colspan='2'>".$row['ThanhTien']."</td>";
+			echo "<td colspan='3' style='color:red'><b>".$row['ThanhTien']."</b></td>";
 			
 			echo "</tr>";
 			//take id to show data
-			echo "<tr class='$mahoadon detail'><td></td><td></td><td>Tên Sản Phẩm</td><td>Giá Sản Phẩm</td></tr>";
+			echo "<tr class='$mahoadon detail'><td></td><td></td><td style='background:#ddd'>Tên Sản Phẩm</td><td style='background:#ddd'>Giá Sản Phẩm</td><td style='background:#ddd'>Số lượng</td></tr>";
 				
 				$sql = "SELECT chitiethoadon.MaHoaDon, NgayHoaDon, chitiethoadon.MaSanPham, TenSanPham, SoLuong, GiaSanPham, ThanhTien 
 					FROM hoadon 
@@ -73,11 +71,12 @@
 				$result1= $conn->query($sql);
 				while($row1 = $result1->fetch_assoc()){
 					//get id to show data
-					echo "<tr class='$mahoadon detail' style='color:red'>";
+					echo "<tr class='$mahoadon detail' >";
 					echo "<td></td>";
 					echo "<td></td>";
 					echo "<td>".$row1['TenSanPham']."</td>";
 					echo "<td>".$row1['GiaSanPham'].".000 VND</td>";
+					echo "<td >".$row1['SoLuong']."</td>";
 					echo "</tr>";
 				}
 				echo "</tr>";
@@ -91,24 +90,9 @@
 	require '../layout/foot.html';	
 ?>
 <script>
-		
-	$(function(){
-		alert("hello");
-		$('.detail').hide();
-	});
-		
-	$(function(){
-		$("#<?php echo $mahoadon; ?>").click(function(){
-			alert("hellooooo");
-			//$('.detail').hide();
-			//
-		});
-	});
 	
-	function detail(var detail) {
-		alert("hellooooo");	
-		$('.detail').hide();
-		$('.detail').show();
+	function myFunction(mhd) {
+    
 	}
 
 </script>

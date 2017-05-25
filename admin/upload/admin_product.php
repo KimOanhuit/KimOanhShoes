@@ -4,7 +4,7 @@
 	require '../layout/body_short.html';
 	require 'database_config.php';
 	
-	$per_page = 30;
+	$per_page = 10;
 							
 			$sql_result_count = "SELECT MaSanPham FROM sanpham";
 			$result_count = $conn->query($sql_result_count);
